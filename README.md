@@ -74,40 +74,23 @@ This Terraform project builds the following AWS resources:
 ## Repository Structure
 
 ```text
-terraform-aws-ha-web-app/
-│
-├── environments/
-│   └── dev/
-│       ├── main.tf
-│       ├── providers.tf
-│       ├── variables.tf
-│       ├── terraform.tfvars
-│       └── outputs.tf
-│
-├── modules/
-│   ├── network/
+terraform-aws-ha-webapp/
+├── README.md
+├── terraform/
+│   ├── module/
+│   │   ├── alb/
+│   │   ├── compute_asg/
+│   │   ├── database/
+│   │   ├── network/
+│   │   └── security_groups/
+│   ├── production/
 │   │   ├── main.tf
-│   │   ├── variables.tf
-│   │   └── outputs.tf
-│   │
-│   ├── security_groups/
-│   │   ├── main.tf
-│   │   ├── variables.tf
-│   │   └── outputs.tf
-│   │
-│   ├── alb/
-│   │   ├── main.tf
-│   │   ├── variables.tf
-│   │   └── outputs.tf
-│   │
-│   └── compute_asg/
-│       ├── main.tf
-│       ├── variables.tf
-│       └── outputs.tf
-│
-├── runbook.md
-├── architecture.md
-└── README.md
+│   │   ├── variable.tf
+│   │   ├── output.tf
+│   │   └── runbook.md
+│   └── src/
+│       └── app.py
+└── .gitignore
 ```
 
 ---
