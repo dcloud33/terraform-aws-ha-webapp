@@ -140,7 +140,7 @@ terraform version
 From the environment folder:
 
 ```bash
-cd environments/dev
+cd terraform/production
 ```
 
 Initialize Terraform:
