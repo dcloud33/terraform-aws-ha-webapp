@@ -374,16 +374,36 @@ architecture.md
 
 ---
 
-## Project Status
+## EC2 Auto Scaling Failure Recovery Test
 
-This project is currently being developed as a Terraform module practice project for building reusable AWS infrastructure.
+### Objective
+Validate that the AWS Auto Scaling Group automatically replaces a failed EC2 instance while the Application Load Balancer continues serving traffic through healthy instances.
 
-Future improvements may include:
+### Test Environment
+- **Infrastructure:** Terraform-managed AWS resources
+- **Compute:** EC2 instances in private subnets
+- **Load Balancing:** Application Load Balancer
+- **Recovery:** EC2 Auto Scaling Group
+- **Availability:** Multiple Availability Zones
 
-* HTTPS listener with ACM certificate
-* Route 53 DNS record
-* CloudWatch alarms
-* RDS database module
-* WAF integration
-* Remote state backend using S3 and DynamoDB
-* Separate dev, stage, and prod environments
+### Test Procedure
+1. Confirmed that the Auto Scaling Group had healthy EC2 instances.
+2. Manually stopped one running EC2 instance to simulate an infrastructure failure.
+3. Observed the Auto Scaling Group's response through the AWS Console.
+4. Verified that the Auto Scaling Group automatically launched a replacement EC2 instance.
+5. Confirmed that the Application Load Balancer continued serving application traffic through a remaining healthy instance.
+
+### Observed Results
+
+| Validation | Result |
+|---|---|
+| EC2 instance stopped | Confirmed |
+| Auto Scaling detected instance failure | Confirmed through replacement behavior |
+| Replacement EC2 instance launched | Passed |
+| Manual intervention required | No |
+| ALB continued serving application traffic | Passed |
+
+### Outcome
+The failure test demonstrated that the Auto Scaling Group could automatically restore instance capacity while the Application Load Balancer maintained application availability through a healthy backend instance.
+
+**Scope:** This was a controlled failure test in a personal AWS lab environment, not a production availability test.
